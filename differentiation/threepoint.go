@@ -4,7 +4,8 @@ import (
 	"github.com/Arrow/nm/util"
 )
 
-func ThreePoint(f util.Function, x float64) (fp float64) {
+func ThreePoint(fn util.Functioner, x float64) (fp float64) {
 	h := StepSize
-	return ((f(x+h)-f(x-h))/(2*h))
+	f := fn.Function()
+	return ((f(x+h) - f(x-h)) / (2 * h))
 }

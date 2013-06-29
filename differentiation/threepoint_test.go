@@ -1,35 +1,23 @@
 package differentiation
 
 import (
+	"github.com/Arrow/nm/util"
 	"math"
 	"testing"
-	"github.com/Arrow/nm/util"
 )
 
-var diff_test3pt = []util.TestXY{
-	{-5, -10},
-	{-2, -4},
-	{0, 0},
-	{2, 4},
-	{5, 10},
-}
-
-func testFunc3pt(x float64) float64 {
-	return math.Pow(x, 2)
-}
-
 func TestThreePoint(t *testing.T) {
-	f := testFunc3pt
-	for _, c := range diff_test3pt {
-		if(!util.Tolerance(ThreePoint(f, c.X), c.Y, tol)) {
-			t.Errorf("Three point out of tolerance.")
+	test_cases := diff_test[0].XYs()
+	for i, c := range test_cases {
+		if !util.Tolerance(ThreePoint(diff_test[0].f, c.X), c.Y, tol) {
+			t.Errorf("Three point out of tolerance. i = %v, diff = %.6f",
+				i, math.Abs(c.Y-c.X))
 		}
 	}
 }
 
 func BenchmarkThreePoint(b *testing.B) {
-	f := testFunc3pt
 	for i := 0; i < b.N; i++ {
-		ThreePoint(f, diff_test3pt[4].X)
+		ThreePoint(diff_test[0].f, diff_test[0].b)
 	}
 }

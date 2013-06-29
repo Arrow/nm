@@ -1,35 +1,23 @@
 package differentiation
 
 import (
+	"github.com/Arrow/nm/util"
 	"math"
 	"testing"
-	"github.com/Arrow/nm/util"
 )
 
-var diff_test5pt = []util.TestXY{
-	{-5, -10},
-	{-2, -4},
-	{0, 0},
-	{2, 4},
-	{5, 10},
-}
-
-func testFunc5pt(x float64) float64 {
-	return math.Pow(x, 2)
-}
-
 func TestFivePoint(t *testing.T) {
-	f := testFunc5pt
-	for _, c := range diff_test5pt {
-		if(!util.Tolerance(FivePoint(f, c.X), c.Y, tol)) {
-			t.Errorf("Three point out of tolerance.")
+	test_cases := diff_test[0].XYs()
+	for i, c := range test_cases {
+		if !util.Tolerance(FivePoint(diff_test[0].f, c.X), c.Y, tol) {
+			t.Errorf("Five point out of tolerance. i = %v, diff = %.6f",
+				i, math.Abs(c.Y-c.X))
 		}
 	}
 }
 
 func BenchmarkFivePoint(b *testing.B) {
-	f := testFunc5pt
 	for i := 0; i < b.N; i++ {
-		FivePoint(f, diff_test5pt[4].X)
+		FivePoint(diff_test[0].f, diff_test[0].b)
 	}
 }
