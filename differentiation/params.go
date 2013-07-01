@@ -6,6 +6,6 @@ var (
 )
 
 func init() {
-	StepSize = 0.0001
+	StepSize = 0.00001
 	tol = 0.01
 }

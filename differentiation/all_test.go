@@ -65,13 +65,13 @@ func init() {
 	diff_test[2].a, diff_test[2].b = 0.005, 1
 
 	// 4  - f(x) = 1/x
-	//      f'(x) = 1/x^2
+	//      f'(x) = - 1/x^2
 	//	xmin =  10E-10
 	//	xmax =  1000
 	//	a =  0.005
 	//	b =  1
 	diff_test[3].f.F = func(x float64) float64 { return 1 / x }
-	diff_test[3].f.Fp = func(x float64) float64 { return 1 / math.Pow(x, 2) }
+	diff_test[3].f.Fp = func(x float64) float64 { return -1 / math.Pow(x, 2) }
 	diff_test[3].a, diff_test[3].b = 0.005, 1
 
 	// 5  - f(x) = ln x
@@ -101,7 +101,7 @@ func init() {
 	//	a = -2
 	//	b =  5
 	diff_test[6].f.F = func(x float64) float64 { return math.Log(x + math.Sqrt(1+math.Pow(x, 2))) }
-	diff_test[6].f.Fp = func(x float64) float64 { return 1 / math.Pow(x, 2) }
+	diff_test[6].f.Fp = func(x float64) float64 { return 1 / math.Sqrt(1+math.Pow(x, 2)) }
 	diff_test[6].a, diff_test[6].b = -2, 5
 
 	// 8  - f(x) = sin x
@@ -160,9 +160,9 @@ func init() {
 	//	xmax =  1000
 	//	a =  0
 	//	b =  0.5
-	diff_test[3].f.F = func(x float64) float64 { return 1 / (math.Pow(x, 2) + 0.01) }
-	diff_test[3].f.Fp = func(x float64) float64 { return -2 * x / math.Pow(x*x+0.01, 2) }
-	diff_test[3].a, diff_test[3].b = 0, 0.5
+	diff_test[12].f.F = func(x float64) float64 { return 1 / (math.Pow(x, 2) + 0.01) }
+	diff_test[12].f.Fp = func(x float64) float64 { return -2 * x / math.Pow(x*x+0.01, 2) }
+	diff_test[12].a, diff_test[12].b = 0, 0.5
 }
 
 /*
